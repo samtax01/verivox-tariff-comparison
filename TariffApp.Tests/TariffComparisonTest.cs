@@ -8,6 +8,8 @@ namespace TariffApp.Tests
         [Fact]
         public void Test1()
         {
+            
         }
+        
     }
 }
