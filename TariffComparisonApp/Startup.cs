@@ -37,7 +37,7 @@ namespace TariffComparisonApp
                     Version = "v1",
                     Description = "This API will <ul>" +
                                   "<li>Manage tariff products</li>" +
-                                  "<li>Compare tariff products when consumption value is passed in</li>" +
+                                  "<li>Compare tariff products based on consumption value</li>" +
                                   "</ul>",
                 });
 

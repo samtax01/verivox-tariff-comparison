@@ -31,10 +31,7 @@ namespace TariffComparisonApp.Repositories
                 AnnualCosts = p.PriceCalculation.GetAnnualCosts(consumptionRequest.Consumption)
             }).OrderBy(p=>p.AnnualCosts);
         }
-        
-        
-        
-        
+
         /// <summary>
         /// TODO: Sample products seeder method for testing [to be deleted]
         /// </summary>
