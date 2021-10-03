@@ -7,7 +7,7 @@ namespace TariffComparisonApp.Data
         public const string ApiVersion = "/api/v1";
         
         public static class Locale{
-            public const string BusinessNotFound = "Business not found";
+            public const string FailedToSave = "Unable to seed data";
         }
 
     }

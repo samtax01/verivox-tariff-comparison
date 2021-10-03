@@ -2,14 +2,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TariffComparisonApp.Models;
+using TariffComparisonApp.Tests.Helpers;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace TariffComparisonApp.Tests
 {
-    public class TariffComparisonTest: DiResolver
+    public class TariffComparisonUnitTest: DiResolver
     {
-        public TariffComparisonTest(ITestOutputHelper testOutputHelper) : base(testOutputHelper) { }
+        public TariffComparisonUnitTest(ITestOutputHelper testOutputHelper) : base(testOutputHelper) { }
         
         
         [Fact]
@@ -86,11 +87,6 @@ namespace TariffComparisonApp.Tests
             // Assert
             Assert.Equal(Seeders.Product2Name, products.First().TariffName);
         } 
-
-
-
-
-
 
 
     }

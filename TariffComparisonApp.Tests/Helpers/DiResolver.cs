@@ -3,10 +3,9 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using TariffComparisonApp.Data;
-using TariffComparisonApp.Tests.Helpers;
 using Xunit.Abstractions;
 
-namespace TariffComparisonApp.Tests
+namespace TariffComparisonApp.Tests.Helpers
 {
     public abstract class DiResolver: AbstractIntegrationTest {
 

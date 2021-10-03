@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using TariffComparisonApp.Models;
 
-namespace TariffComparisonApp.Tests
+namespace TariffComparisonApp.Tests.Helpers
 {
     public class Seeders
     {

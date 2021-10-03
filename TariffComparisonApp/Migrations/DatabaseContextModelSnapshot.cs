@@ -77,13 +77,11 @@ namespace TariffComparisonApp.Migrations
 
             modelBuilder.Entity("TariffComparisonApp.Models.ProductPriceCalculation", b =>
                 {
-                    b.HasOne("TariffComparisonApp.Models.Product", "Product")
+                    b.HasOne("TariffComparisonApp.Models.Product", null)
                         .WithOne("PriceCalculation")
                         .HasForeignKey("TariffComparisonApp.Models.ProductPriceCalculation", "ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("TariffComparisonApp.Models.Product", b =>

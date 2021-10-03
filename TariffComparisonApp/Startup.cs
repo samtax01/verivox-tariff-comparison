@@ -1,14 +1,16 @@
 using System;
 using System.IO;
 using System.Reflection;
+using Ehex.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using TariffComparisonApp.Data;
+using TariffComparisonApp.Repositories;
+using TariffComparisonApp.Repositories.Interfaces;
 
 namespace TariffComparisonApp
 {
@@ -34,8 +36,8 @@ namespace TariffComparisonApp
                     Title = "Tariff Comparison App", 
                     Version = "v1",
                     Description = "This API will <ul>" +
-                                  "<li>Add a new Product</li>" +
-                                  "<li>Compare products tariff</li>" +
+                                  "<li>Manage tariff products</li>" +
+                                  "<li>Compare tariff products when consumption value is passed in</li>" +
                                   "</ul>",
                 });
 
@@ -44,28 +46,36 @@ namespace TariffComparisonApp
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
-            
-            services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("TariffComparison_MS_Database")), ServiceLifetime.Singleton);
 
+            services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("TariffComparison_MS_Database")), ServiceLifetime.Singleton);
+            services.AddScoped<IProductRepository, ProductRepository>();
+            
+            // Global Exception Handler
+            services.AddControllers(options => options.Filters.Add(new ApiExceptionHandlerFilter()));
         }
+        
+        
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TariffComparisonApp v1"));
-            }
-
+            
+            app.UseDeveloperExceptionPage();
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+           
+            // Setup Swagger Docs
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("../swagger/v1/swagger.json", "Tariff Comparison Application");
+            });
+            
         }
     }
 }

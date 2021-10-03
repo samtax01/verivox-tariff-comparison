@@ -8,8 +8,7 @@ namespace TariffComparisonApp.Models
         
         [MaxLength(50)]
         public string TariffName { get; set; }
-        
-        
+
         [Column(TypeName = "decimal(18,2)")]
         public decimal AnnualCosts { get; set; }
         
